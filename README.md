@@ -128,7 +128,7 @@ Decorate and compose your saga functions,
 	}
 
 
-## APIs
+## API Reference
 
 - <a name="repeatable">repeatable(saga, config, …args)</a>
 
