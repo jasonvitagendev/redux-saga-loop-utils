@@ -1,8 +1,14 @@
 {
   "name": "redux-saga-loop-utils",
-  "version": "0.0.44",
+  "version": "0.0.45",
   "description": "",
-  "keywords": ["redux-saga", "redux", "saga", "effects", "side effects"],
+  "keywords": [
+    "redux-saga",
+    "redux",
+    "saga",
+    "effects",
+    "side effects"
+  ],
   "main": "dist/redux-saga-loop-utils.umd.js",
   "module": "dist/redux-saga-loop-utils.es5.js",
   "typings": "dist/types/redux-saga-loop-utils.d.ts",
