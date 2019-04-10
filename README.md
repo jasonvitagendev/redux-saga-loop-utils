@@ -238,7 +238,7 @@ Decorate and compose your saga functions,
 		{
             initialResponse?: any
     	}
-	- **withPreviousResponse** caches the last response returned from callee saga and passes it to the caller saga like so,
+	- **withPreviousResponse** caches the last response returned from the callee saga and passes it to the caller saga like so,
 
 			function* saga() {
                 yield call(function*() {
