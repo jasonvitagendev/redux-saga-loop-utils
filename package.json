@@ -1,6 +1,6 @@
 {
   "name": "redux-saga-loop-utils",
-  "version": "0.0.40",
+  "version": "0.0.41",
   "description": "",
   "keywords": [],
   "main": "dist/redux-saga-loop-utils.umd.js",
