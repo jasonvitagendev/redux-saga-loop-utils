@@ -148,7 +148,7 @@ Decorate and compose your saga functions,
 	**config**
 		
 		{
-            startAction?: string | string[]
+            startAction: string | string[]
             stopAction: string | string[]
             noAutoStart?: boolean
     	}
