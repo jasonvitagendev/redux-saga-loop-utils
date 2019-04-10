@@ -135,7 +135,7 @@ Decorate and compose your saga functions,
 	**config**
 	
 		{
-            interval: () => number | number
+            interval: number | (() => number)
             maxRepeats?: number
     	}
 
