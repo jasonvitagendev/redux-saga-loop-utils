@@ -1,5 +1,5 @@
-import { call } from 'redux-saga/effects'
-import { timeout } from './utils/timeout'
+import {call} from 'redux-saga/effects'
+import {timeout} from './utils/timeout'
 
 export const retry = (
     saga: (...args: any[]) => any,
