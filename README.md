@@ -85,32 +85,36 @@ Decorate and compose your saga functions,
 
 	function* saga() {
         yield call(
-	        stoppable(
-	            restartable(callAPI, {
-	                restartAction: 'RESTART_ACTION'
-	            }),
-	            {
-	                stopAction: 'STOP_ACTION'
-	            }
-	        )
-	    );
-	}
+            stoppable(
+                restartable(
+                    repeatable(callAPI, {
+                        interval: 60000
+                    }),
+                    {
+                        restartAction: 'RESTART_ACTION'
+                    }
+                ),
+                {
+                    stopAction: 'STOP_ACTION'
+                }
+            )
+        );
+    }
 
 #### Use case 5: Handle HTTP request error
 
 	const handleApiError = saga =>
         function*() {
             try {
-                const {response} = yield call(saga);
+                const response = yield call(saga);
                 return response;
             } catch (err) {
                 const {response: {status} = {}, config} = err;
                 if (status === 401) {
-                    yield showModal('Unauthenticated');
-                    yield put({type: 'STOP_ACTION'});
+                    // Unauthenticated
                 }
                 if (!status) {
-                    yield showModal('Network error');
+                    // Network error
                 }
                 throw err;
             }
@@ -127,6 +131,26 @@ Decorate and compose your saga functions,
         );
 	}
 
+#### Use case 6: Make an HTTP request and retry upon failure
+
+    function* callAPI(payload) {
+        const {data} = axios.post(API_URL, payload);
+        return data;
+    }
+    
+    function* saga() {
+        const result = yield call(
+            retry(
+                callAPI,
+                {
+                    interval: 3000
+                },
+                {
+                    sample: 'payload'
+                }
+            )
+        );
+    }
 
 ## API Reference
 
