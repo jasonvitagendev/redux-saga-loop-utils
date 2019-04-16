@@ -125,6 +125,6 @@
     "typescript": "^3.0.3"
   },
   "peerDependencies": {
-    "redux-saga": "^1.0.2"
+    "redux-saga": "*"
   }
 }
