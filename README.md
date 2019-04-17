@@ -133,8 +133,8 @@ Decorate and compose your saga functions,
 
 #### Use case 6: Make an HTTP request and retry upon failure
 
-    function* callAPI(payload) {
-        const {data} = axios.post(API_URL, payload);
+    function* callAPI() {
+        const {data} = axios.get(API_URL);
         return data;
     }
     
@@ -144,9 +144,6 @@ Decorate and compose your saga functions,
                 callAPI,
                 {
                     interval: 3000
-                },
-                {
-                    sample: 'payload'
                 }
             )
         );
