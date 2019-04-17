@@ -302,6 +302,7 @@ function* saga() {
     ```
 	- **initialAction** is *undefined* if not provided
 		
+<br>
 
 - <a name="withPreviousResponse">withPreviousResponse(saga, config, …args)</a>
 
