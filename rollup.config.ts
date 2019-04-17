@@ -4,7 +4,6 @@ import sourceMaps from 'rollup-plugin-sourcemaps'
 import camelCase from 'lodash.camelcase'
 import typescript from 'rollup-plugin-typescript2'
 import json from 'rollup-plugin-json'
-import autoExternal from 'rollup-plugin-auto-external'
 
 const pkg = require('./package.json')
 
