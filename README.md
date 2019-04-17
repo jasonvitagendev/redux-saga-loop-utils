@@ -234,33 +234,34 @@ function* saga() {
     }
     ```	
 	- By default, it commences execution without waiting for **restartAction**, unless **noAutoStart: true** is specified
-    - Saga can always restart again using **restartAction**
+	- Saga can always restart again using **restartAction**
     - **restartable** is almost identical to **takeLatest**, the difference is with **restartable** you can compose your saga functions like so,
+    
 
-        ```javascript
-        function* saga() {
-            yield call(
-                restartable(
-                    stoppable(
-                        restartable(
-                            function*() {
-                                // do something
-                            },
-                            {
-                                restartAction: 'RESTART_ACTION_2'
-                            }
-                        ),
+    ```javascript
+    function* saga() {
+        yield call(
+            restartable(
+                stoppable(
+                    restartable(
+                        function*() {
+                            // do something
+                        },
                         {
-                            stopAction: 'STOP_ACTION'
+                            restartAction: 'RESTART_ACTION_2'
                         }
                     ),
                     {
-                        restartAction: 'RESTART_ACTION_1'
+                        stopAction: 'STOP_ACTION'
                     }
-                )
-            );
-        }
-		```
+                ),
+                {
+                    restartAction: 'RESTART_ACTION_1'
+                }
+            )
+        );
+    }
+    ```
 	
 <br>
 
@@ -289,16 +290,16 @@ function* saga() {
     }
     ```
 	- **withPreviousAction** caches the last dispatched action and passes it to the callee saga like so,
-        ```javascript
-        function* saga() {
-            yield takeLatest(
-                'SOME_ACTION',
-                withPreviousAction(function*(action, previousAction) {
-                    // do something
-                })
-            );
-        }
-		```
+    ```javascript
+    function* saga() {
+        yield takeLatest(
+            'SOME_ACTION',
+            withPreviousAction(function*(action, previousAction) {
+                // do something
+            })
+        );
+    }
+    ```
 	- **initialAction** is *undefined* if not provided
 		
 
@@ -311,11 +312,11 @@ function* saga() {
     }
     ```
 	- **withPreviousResponse** caches the last response returned from the callee saga and passes it to the caller saga like so,
-        ```javascript
-        function* saga() {
-            yield call(function*() {
-                const {prev, next} = yield call(withPreviousResponse(callAPI));
-            });
-        }
-		```
+    ```javascript
+    function* saga() {
+        yield call(function*() {
+            const {prev, next} = yield call(withPreviousResponse(callAPI));
+        });
+    }
+    ```
 	- **initialResponse** is *undefined* if not provided
