@@ -148,6 +148,36 @@ Decorate and compose your saga functions,
             )
         );
     }
+    
+#### Use case 7: Passing args
+
+    function* saga() {
+        yield call(
+            stoppable(
+                restartable(
+                    repeatable(
+                        function*(a, b, c) {
+                            // a === 'a'
+                            // b === 'b'
+                            // c === 'c'
+                        },
+                        {
+                            interval: 3000
+                        },
+                        'a'
+                    ),
+                    {
+                        restartAction: 'RESTART_ACTION'
+                    },
+                    'b'
+                ),
+                {
+                    stopAction: 'STOP_ACTION'
+                },
+                'c'
+            )
+        );
+    }
 
 ## API Reference
 
