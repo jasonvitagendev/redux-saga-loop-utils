@@ -1,5 +1,5 @@
-import {call} from 'redux-saga/effects'
-import {timeout} from './utils/timeout'
+import { call } from 'redux-saga/effects'
+import { timeout } from './utils/timeout'
 
 export const repeatable = (
     saga: (...args: any[]) => any,
@@ -18,7 +18,7 @@ export const repeatable = (
                 typeof interval === 'function' ? yield call(interval) : interval
             try {
                 if (maxRepeats--) {
-                    yield call(saga, ...[rest, ...sagaRest])
+                    yield call(saga, ...[...rest, ...sagaRest])
                 } else {
                     return
                 }
