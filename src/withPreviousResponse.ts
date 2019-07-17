@@ -1,4 +1,4 @@
-import {call} from 'redux-saga/effects'
+import { call } from 'redux-saga/effects'
 
 export const withPreviousResponse = (
     saga: (...args: any[]) => any,
@@ -6,7 +6,7 @@ export const withPreviousResponse = (
         initialResponse
     }: {
         initialResponse?: any
-    },
+    } = {},
     ...rest: any[]
 ) => {
     let previousResponse = initialResponse
