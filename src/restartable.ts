@@ -1,4 +1,4 @@
-import {take, race, call} from 'redux-saga/effects'
+import { take, race, call } from 'redux-saga/effects'
 
 export const restartable = (
     saga: (...args: any[]) => any,
@@ -12,7 +12,7 @@ export const restartable = (
     ...rest: any[]
 ) => {
     return function*(...sagaRest: any[]) {
-        let actions = []
+        let actions: any[] = []
         if (noAutoStart) {
             const action = yield take(restartAction)
             actions = [action]
