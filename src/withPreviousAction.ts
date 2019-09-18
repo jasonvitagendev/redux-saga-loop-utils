@@ -1,4 +1,4 @@
-import { call } from 'redux-saga/effects'
+import {call} from 'redux-saga/effects'
 
 export const withPreviousAction = (
     saga: (...args: any[]) => any,
