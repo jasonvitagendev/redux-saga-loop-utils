@@ -1,7 +1,7 @@
 {
   "name": "redux-saga-loop-utils",
   "version": "0.1.2",
-  "description": "",
+  "description": "A library that provides a better pattern to manage(start, stop, restart) loops in your redux-saga application",
   "keywords": [
     "redux-saga",
     "redux",
