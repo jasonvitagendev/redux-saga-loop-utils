@@ -80,7 +80,8 @@
   },
   "prettier": {
     "semi": false,
-    "singleQuote": true
+    "singleQuote": true,
+    "bracketSpacing": false
   },
   "commitlint": {
     "extends": [
