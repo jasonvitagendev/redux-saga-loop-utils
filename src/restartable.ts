@@ -1,18 +1,20 @@
-import {take, race, call} from 'redux-saga/effects'
+import { take, race, apply } from 'redux-saga/effects'
 
 export const restartable = (
     saga: (...args: any[]) => any,
     {
         restartAction,
-        noAutoStart
+        noAutoStart,
+        noReturn = false
     }: {
         restartAction: string | string[]
         noAutoStart?: boolean
+        noReturn?: boolean
     },
     ...rest: any[]
 ) => {
     return function*(...sagaRest: any[]) {
-        let actions = []
+        let actions: any[] = []
         if (noAutoStart) {
             const action = yield take(restartAction)
             actions = [action]
@@ -25,13 +27,19 @@ export const restartable = (
                 start: any
                 restart: any
             } = yield race({
-                start: call(saga, ...[...rest, ...sagaRest], ...actions),
+                start: apply(null, saga, rest.concat(sagaRest).concat(actions)),
                 restart: take(restartAction)
             })
             if (!restart) {
-                return start
+                if (noReturn) {
+                    const action = yield take(restartAction)
+                    actions = [action]
+                } else {
+                    return start
+                }
+            } else {
+                actions = [restart]
             }
-            actions = [restart]
         }
     }
 }

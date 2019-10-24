@@ -1,34 +1,37 @@
-import {take, race, call} from 'redux-saga/effects'
+import { apply, race, take } from 'redux-saga/effects'
 
 export const stoppable = (
     saga: (...args: any[]) => any,
     {
         startAction,
         stopAction,
-        noAutoStart
+        noAutoStart,
+        noReturn = false
     }: {
         startAction: string | string[]
         stopAction: string | string[]
         noAutoStart?: boolean
+        noReturn?: boolean
     },
     ...rest: any[]
 ) => {
     return function*(...sagaRest: any[]) {
-        let actions = []
+        let actions: any[] = []
         if (noAutoStart) {
             const action = yield take(startAction)
             actions = [action]
         }
         while (true) {
-            const {start, stop} = yield race({
-                start: call(saga, ...[...rest, ...sagaRest], ...actions),
+            const { start, stop } = yield race({
+                start: apply(null, saga, rest.concat(sagaRest).concat(actions)),
                 stop: take(stopAction)
             })
-            if (!stop) {
+            if (!stop && !noReturn) {
                 return start
+            } else {
+                const action = yield take(startAction)
+                actions = [action]
             }
-            const action = yield take(startAction)
-            actions = [action]
         }
     }
 }

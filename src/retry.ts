@@ -1,5 +1,5 @@
-import {call} from 'redux-saga/effects'
-import {timeout} from './utils/timeout'
+import { apply } from 'redux-saga/effects'
+import { timeout } from './utils/timeout'
 
 export const retry = (
     saga: (...args: any[]) => any,
@@ -18,7 +18,7 @@ export const retry = (
             tempRetries = maxRetries--
             try {
                 if (tempRetries) {
-                    return yield call(saga, ...[...rest, ...sagaRest])
+                    return yield apply(null, saga, rest.concat(sagaRest))
                 }
             } catch (err) {
                 yield timeout(interval)

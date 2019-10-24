@@ -1,4 +1,4 @@
-import { call } from 'redux-saga/effects'
+import { apply } from 'redux-saga/effects'
 
 export const withPreviousResponse = (
     saga: (...args: any[]) => any,
@@ -11,7 +11,7 @@ export const withPreviousResponse = (
 ) => {
     let previousResponse = initialResponse
     return function*(...sagaRest: any[]) {
-        const response = yield call(saga, ...[...rest, ...sagaRest])
+        const response = yield apply(null, saga, rest.concat(sagaRest))
         const result = {
             prev: previousResponse,
             next: response

@@ -1,4 +1,4 @@
-import { call } from 'redux-saga/effects'
+import { apply } from 'redux-saga/effects'
 
 export const withPreviousAction = (
     saga: (...args: any[]) => any,
@@ -11,7 +11,11 @@ export const withPreviousAction = (
 ) => {
     let previousAction = initialAction
     return function*(action: any) {
-        const data = yield call(saga, action, previousAction, ...rest)
+        const data = yield apply(
+            null,
+            saga,
+            [action, previousAction].concat(rest)
+        )
         previousAction = action
         return data
     }
