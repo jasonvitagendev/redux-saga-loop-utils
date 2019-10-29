@@ -1,22 +1,28 @@
-import { apply } from 'redux-saga/effects'
+import { apply, fork } from 'redux-saga/effects'
 
 export const withPreviousAction = (
     saga: (...args: any[]) => any,
     {
-        initialAction
+        initialAction,
+        noReturn = false
     }: {
         initialAction?: any
+        noReturn?: boolean
     } = {},
     ...rest: any[]
 ) => {
     let previousAction = initialAction
     return function*(action: any) {
-        const data = yield apply(
-            null,
-            saga,
-            [action, previousAction].concat(rest)
-        )
-        previousAction = action
-        return data
+        if (noReturn) {
+            yield fork(saga, action, previousAction, rest)
+        } else {
+            const data = yield apply(
+                null,
+                saga,
+                [action, previousAction].concat(rest)
+            )
+            previousAction = action
+            return data
+        }
     }
 }
