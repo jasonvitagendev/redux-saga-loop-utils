@@ -1,4 +1,4 @@
-import { apply, fork } from 'redux-saga/effects'
+import {apply, fork} from 'redux-saga/effects'
 
 export const withPreviousAction = (
     saga: (...args: any[]) => any,
