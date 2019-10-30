@@ -7,18 +7,25 @@ export const repeatable = (
         interval,
         maxRepeats = Infinity
     }: {
-        interval: number | (() => number)
+        interval: number | ((response: any) => number)
         maxRepeats?: number
     },
     ...rest: any[]
 ) => {
     return function*(...sagaRest: any[]) {
         while (true) {
-            const finalInterval =
-                typeof interval === 'function' ? yield call(interval) : interval
+            let finalInterval
             try {
                 if (maxRepeats--) {
-                    yield apply(null, saga, rest.concat(sagaRest))
+                    const response = yield apply(
+                        null,
+                        saga,
+                        rest.concat(sagaRest)
+                    )
+                    finalInterval =
+                        typeof interval === 'function'
+                            ? yield call(interval, response)
+                            : interval
                 } else {
                     return
                 }
