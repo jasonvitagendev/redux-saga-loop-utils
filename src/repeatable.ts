@@ -1,5 +1,5 @@
-import { call, apply } from 'redux-saga/effects'
-import { timeout } from './utils/timeout'
+import {call, apply} from 'redux-saga/effects'
+import {timeout} from './utils/timeout'
 
 export const repeatable = (
     saga: (...args: any[]) => any,
