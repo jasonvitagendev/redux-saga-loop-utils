@@ -30,7 +30,7 @@ export const repeatable = (
                     return
                 }
             } catch (err) {
-                //
+                console.log(err)
             } finally {
                 yield timeout(finalInterval)
             }
