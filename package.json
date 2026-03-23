@@ -1,6 +1,6 @@
 {
   "name": "redux-saga-loop-utils",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "keywords": [
     "redux-saga",
@@ -22,7 +22,7 @@
   },
   "license": "MIT",
   "engines": {
-    "node": ">=22"
+    "node": ">=20"
   },
   "scripts": {
     "lint": "biome check .",
