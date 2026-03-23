@@ -1,11 +1,11 @@
-import {call, apply} from 'redux-saga/effects'
+import {apply, call } from 'redux-saga/effects'
 import {timeout} from './utils/timeout'
 
 export const repeatable = (
     saga: (...args: any[]) => any,
     {
         interval,
-        maxRepeats = Infinity
+        maxRepeats = Number.POSITIVE_INFINITY
     }: {
         interval: number | ((response: any) => number)
         maxRepeats?: number

@@ -1,4 +1,4 @@
-import { take, race, apply } from 'redux-saga/effects'
+import { apply, race, take } from 'redux-saga/effects'
 
 export const restartable = (
     saga: (...args: any[]) => any,
